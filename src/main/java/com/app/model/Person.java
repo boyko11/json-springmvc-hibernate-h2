@@ -1,5 +1,9 @@
 package com.app.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -33,6 +38,10 @@ public class Person {
     @JoinColumn(name = "village_id")
 	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 	private Village village;
+	
+	@OneToMany(mappedBy = "person", cascade={CascadeType.ALL})
+	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+	private List<Donkey> donkeys;
 	
 	public Person() {
 	}
@@ -81,5 +90,21 @@ public class Person {
 
 	public void setVillage(Village village) {
 		this.village = village;
+	}
+
+	public List<Donkey> getDonkeys() {
+		return donkeys;
+	}
+
+	public void setDonkeys(List<Donkey> donkeys) {
+		this.donkeys = donkeys;
+	}
+	
+	public void addToDonkeys(Donkey donkey) {
+		
+		if(donkeys == null) {
+			donkeys = new ArrayList<Donkey>();
+		}
+		donkeys.add(donkey);
 	}
 }

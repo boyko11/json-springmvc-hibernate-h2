@@ -38,7 +38,7 @@ public class RestDonkeyClient {
 		
 		//POST (Create)
 		Donkey newDonkey = new Donkey();
-		newDonkey.setId("78");
+		newDonkey.setId(78);
 		newDonkey.setName("SuperNewDonkey");
 		newDonkey.setTemper("Laid-Back");
 		newDonkey.setAge(7);

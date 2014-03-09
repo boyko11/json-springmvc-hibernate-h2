@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.app.model.Donkey;
 import com.app.model.Person;
 import com.app.model.Village;
 
@@ -32,6 +33,7 @@ public class HibernateService {
 		configuration.setProperty("hibernate.format_sql", "true");
 
 		configuration.addPackage("com.app.model")
+			.addAnnotatedClass(Donkey.class)
 			.addAnnotatedClass(Person.class)
 			.addAnnotatedClass(Village.class);
 
@@ -52,13 +54,26 @@ public class HibernateService {
 		p1.setFirstName("1111");
 		p1.setLastName("L-11111");
 		
+		Donkey d1 = new Donkey();
+		d1.setAge(14);
+		d1.setName("Donkey1");
+		d1.setTemper("Cray-Cray");
+		d1.setPerson(p1);
+		
+		Donkey d2 = new Donkey();
+		d2.setAge(24);
+		d2.setName("Donkey777");
+		d2.setTemper("Chill-Chill");
+		d2.setPerson(p1);
+		
+		p1.addToDonkeys(d1);
+		p1.addToDonkeys(d2);
+		
 		Person p2 = new Person();
 		p2.setAge(22);
 		p2.setFirstName("2222");
 		p2.setLastName("L-2222");
 		
-		//session.save(p1);
-		//session.save(p2);
 		
 		Village v1 = new Village();
 		v1.setName("Boykovino");
