@@ -5,29 +5,28 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
-import com.app.model.Person;
+import com.app.model.Village;
 import com.app.service.HibernateService;
 
 @Service
-public class PersonDAO {
+public class VillageDAO {
+
+	public Village getVillage(int id) {
+		
+		Session session = HibernateService.getSessionFactory().openSession();
+		Village village = (Village) session.load(Village.class, id);
+		return village;
+	}
 	
-	public void create(Person person) {
+	public void create(Village village) {
 		
 		SessionFactory sessionFactory = HibernateService.getSessionFactory();
 		
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		
-		session.save(person);
+		session.save(village);
 		
 		tx.commit();
 	}
-	
-	public Person get(int id) {
-		
-		Session session = HibernateService.getSessionFactory().openSession();
-		Person p = (Person) session.load(Person.class, id);
-		return p;
-	}
-
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.app.model.Donkey;
+import com.app.service.HibernateService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,7 @@ public class JsonDonkeyController {
 
   @RequestMapping(value="{id}", method = RequestMethod.GET, produces={"application/json"})
   public @ResponseBody Donkey getPerson(@PathVariable String id){
+	 HibernateService.getSessionFactory();
     Donkey donkey = donkeyRecords.get(id);
     if(donkey == null) {
     	return new Donkey();
