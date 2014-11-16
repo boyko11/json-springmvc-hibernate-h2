@@ -19,11 +19,11 @@ public class JsonDonkeyController {
 
   private static Map<String, Donkey> donkeyRecords = new HashMap<String, Donkey>();
   static{
-    donkeyRecords.put("1", new Donkey("1", "SuperDonkey", "angry", 5));
-    donkeyRecords.put("2", new Donkey("2", "SmartDonkey", "mellow", 7));
-    donkeyRecords.put("3", new Donkey("3", "FunDonkey", "fun", 3));
-    donkeyRecords.put("4", new Donkey("4", "AngryDonkey", "angry", 3));
-    donkeyRecords.put("5", new Donkey("5", "LazyDonkey", "lazy", 4));
+    donkeyRecords.put("1", new Donkey(1, "SuperDonkey", "angry", 5));
+    donkeyRecords.put("2", new Donkey(2, "SmartDonkey", "mellow", 7));
+    donkeyRecords.put("3", new Donkey(3, "FunDonkey", "fun", 3));
+    donkeyRecords.put("4", new Donkey(4, "AngryDonkey", "angry", 3));
+    donkeyRecords.put("5", new Donkey(5, "LazyDonkey", "lazy", 4));
   }
 
   @RequestMapping(value="{id}", method = RequestMethod.GET, produces={"application/json"})
@@ -39,7 +39,7 @@ public class JsonDonkeyController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public @ResponseBody Donkey create(@RequestBody Donkey donkey) {
 
-		donkeyRecords.put(donkey.getId(), donkey);
+		donkeyRecords.put(String.valueOf(donkey.getId()), donkey);
 
 		return donkey;
 	}
